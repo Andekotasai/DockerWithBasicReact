@@ -1,26 +1,26 @@
-
 name: basic-react-app-CI
 
 on:
   push:
     branches:
-      -master
+      - master
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      -name: check-out the code
-      uses: actions/checkout@v3
+      - name: check-out the code
+        uses: actions/checkout@v3
 
-      -name: login to github
-      uses: docker/login-action@v3
-      with:
+      - name: login to github
+        uses: docker/login-action@v3
+        with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      
-      -name: build the image
-      run: docker build -t dockerimg -f Dockerfile.dev .
 
-      -name: run the image
-      run: doker run -e CI=true --name testcontainer -p 3000:3000 dockerimg npm run test -- --coverage
+      - name: build the image
+        run: docker build -t dockerimg -f Dockerfile.dev .
+
+      - name: run the image
+        run: docker run -e CI=true --name testcontainer -p 3000:3000 dockerimg npm run test -- --coverage
