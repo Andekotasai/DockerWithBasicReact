@@ -24,3 +24,17 @@ jobs:
 
       - name: run the image
         run: docker run -e CI=true --name testcontainer -p 3000:3000 dockerimg npm run test -- --coverage
+
+      - name: Generate deployment package
+        run: zip -r deploy.zip . -x '*.git*'
+
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v22
+        with:
+          aws_access_key: ${{ var.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ var.AWS_SECRET_ACCESS_KEY }}
+          application_name: basicreact
+          environment_name: basicreact-env
+          version_label: ${{ github.sha }}
+          region: ap-southeast-2
+          deployment_package: deploy.zip
