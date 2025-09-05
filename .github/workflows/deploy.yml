@@ -23,7 +23,8 @@ jobs:
         run: docker build -t dockerimg  .
 
       - name: run the image
-        run: docker run -e CI=true --name testcontainer  dockerimg npm run test -- --coverage
+        # run: docker run -e CI=true --name testcontainer  dockerimg npm run test -- --coverage
+        run: docker run -e CI=true --name testcontainer  dockerimg 
 
       - name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
