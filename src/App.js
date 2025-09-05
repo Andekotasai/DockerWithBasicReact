@@ -9,7 +9,7 @@ function App() {
         <h3>Learn react</h3>
         <h2>Currently i am working as a developer</h2>
         <h3>i have 3 years experience - Cognizant</h3>
-        <p>New Course</p>
+        <p>New Course - will be start by Sep-25</p>
       </header>
     </div>
   );
