@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: build the image
-        run: docker build -t dockerimg -f Dockerfile.dev .
+        run: docker build -t dockerimg  .
 
       - name: run the image
         run: docker run -e CI=true --name testcontainer  dockerimg npm run test -- --coverage
